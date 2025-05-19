@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://pyvr835g2spa"]
+
+[ext_resource type="Script" uid="uid://d3u3b1gor5fry" path="res://Scripts/joc.gd" id="1_6rkpb"]
+[ext_resource type="PackedScene" uid="uid://cetan8b78msb0" path="res://Escenes/nau.tscn" id="2_jw2hj"]
+[ext_resource type="Texture2D" uid="uid://b6tm6oxknn8tu" path="res://Imatges/Nebulosa.png" id="2_krb3q"]
+[ext_resource type="PackedScene" uid="uid://c7hcf04v1ndjj" path="res://Escenes/marcador.tscn" id="4_bgppj"]
+
+[node name="Joc" type="Node2D"]
+script = ExtResource("1_6rkpb")
+
+[node name="Fons" type="Sprite2D" parent="."]
+texture_repeat = 3
+texture = ExtResource("2_krb3q")
+region_enabled = true
+region_rect = Rect2(0, 0, 100000, 100000)
+
+[node name="Nau" parent="." instance=ExtResource("2_jw2hj")]
+
+[node name="Bales" type="Node2D" parent="."]
+
+[node name="Explosions" type="Node2D" parent="."]
+
+[node name="Meteorits" type="Node2D" parent="."]
+
+[node name="PowerUPs" type="Node2D" parent="."]
+
+[node name="TimerNouMeteorit" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="Marcador" parent="." instance=ExtResource("4_bgppj")]
+
+[connection signal="timeout" from="TimerNouMeteorit" to="." method="_on_timer_nou_meteorit_timeout"]

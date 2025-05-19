@@ -1,0 +1,166 @@
+[gd_scene load_steps=22 format=3 uid="uid://cetan8b78msb0"]
+
+[ext_resource type="Texture2D" path="res://Imatges/Atlas/playerShip1_blue.tres" id="1_2uguu"]
+[ext_resource type="Script" uid="uid://cihdgl200acn7" path="res://Scripts/nau.gd" id="1_7gog6"]
+[ext_resource type="PackedScene" uid="uid://cgknbod5rvlhi" path="res://Escenes/laser.tscn" id="2_lo8ci"]
+[ext_resource type="Texture2D" uid="uid://mmpgyk1rkhg2" path="res://Imatges/VXgkg8o.png" id="4_0xb43"]
+[ext_resource type="AudioStream" uid="uid://bwgd0iiyc5466" path="res://Sons/Motor.ogg" id="5_7ghpe"]
+[ext_resource type="Texture2D" uid="uid://ddrk20ca7s537" path="res://Imatges/Barra_vida_transparent.png" id="5_wsdyu"]
+[ext_resource type="Texture2D" uid="uid://bmq66eouhrc26" path="res://Imatges/Barra_vida.png" id="6_gh4r8"]
+[ext_resource type="AudioStream" uid="uid://w1ov4xouvln6" path="res://Sons/laser1.wav" id="6_in2ve"]
+[ext_resource type="AudioStream" uid="uid://b8ngty017y55y" path="res://Sons/ExplosioBomba.mp3" id="7_wkt81"]
+[ext_resource type="Script" uid="uid://cfqk3m5bc3xpj" path="res://Scripts/BarraVida.gd" id="9_dwe3q"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qqh3o"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_mf80q"]
+offsets = PackedFloat32Array(0, 0.467213, 1)
+colors = PackedColorArray(0, 0, 0.992157, 0.996078, 0.141176, 0.913725, 0.996078, 0.996078, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8lhpj"]
+gradient = SubResource("Gradient_mf80q")
+
+[sub_resource type="Curve" id="Curve_naerc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.186813), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ll0m7"]
+curve = SubResource("Curve_naerc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_icufc"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(5, 1, 1)
+angle_min = -25.0
+angle_max = 62.5
+velocity_pivot = Vector3(0, -100, 0)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.07
+scale_max = 0.07
+scale_curve = SubResource("CurveTexture_ll0m7")
+color_ramp = SubResource("GradientTexture1D_8lhpj")
+
+[sub_resource type="Animation" id="Animation_4xj2a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Imatge:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lrjnw"]
+resource_name = "cura"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Imatge:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 1, 0, 1), Color(1, 1, 1, 1), Color(0, 1, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jcyjx"]
+resource_name = "hit"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Imatge:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qtyqq"]
+_data = {
+&"RESET": SubResource("Animation_4xj2a"),
+&"cura": SubResource("Animation_lrjnw"),
+&"hit": SubResource("Animation_jcyjx")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vrd8c"]
+radius = 300.0
+
+[node name="Nau" type="CharacterBody2D"]
+collision_mask = 12
+script = ExtResource("1_7gog6")
+escena_laser = ExtResource("2_lo8ci")
+
+[node name="Imatge" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_2uguu")
+
+[node name="Dreta" type="Marker2D" parent="."]
+position = Vector2(46, -4)
+
+[node name="Esquerra" type="Marker2D" parent="."]
+position = Vector2(-46, -4)
+
+[node name="Estela" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_qqh3o")
+position = Vector2(0, 38)
+amount = 50
+texture = ExtResource("4_0xb43")
+lifetime = 0.4
+process_material = SubResource("ParticleProcessMaterial_icufc")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-7, -35, 6, -35, 10, -10, 36, 4, 43, 1, 45, -3, 48, -3, 45, 23, 42, 18, 34, 21, 12, 26, 5, 35, -5, 35, -12, 26, -36, 21, -42, 18, -45, 23, -48, -4, -45, -4, -42, 2, -36, 4, -11, -10)
+
+[node name="Animacions" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qtyqq")
+}
+
+[node name="Centre" type="Marker2D" parent="."]
+
+[node name="BarraVida" type="TextureProgressBar" parent="Centre"]
+offset_left = -85.0
+offset_top = -100.0
+offset_right = 87.0
+offset_bottom = -60.0
+value = 100.0
+texture_over = ExtResource("5_wsdyu")
+texture_progress = ExtResource("6_gh4r8")
+script = ExtResource("9_dwe3q")
+
+[node name="AreaBomba" type="Area2D" parent="."]
+collision_mask = 4
+monitoring = false
+
+[node name="FormaAreaBomba" type="CollisionShape2D" parent="AreaBomba"]
+shape = SubResource("CircleShape2D_vrd8c")
+
+[node name="SoMotor" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_7ghpe")
+
+[node name="SoLaser" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_in2ve")
+
+[node name="SoBomba" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_wkt81")
+
+[connection signal="area_entered" from="AreaBomba" to="." method="_on_area_bomba_area_entered"]

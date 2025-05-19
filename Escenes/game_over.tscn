@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl2u6dphwu3nq"]
+
+[ext_resource type="Script" uid="uid://t4veu6e0y720" path="res://Scripts/GameOver.gd" id="1_rirt3"]
+[ext_resource type="AudioStream" uid="uid://bcqv8mg2g35xm" path="res://Sons/GameOver.ogg" id="2_lpwre"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rirt3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -357.0
+offset_top = -56.5
+offset_right = 357.0
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+
+[node name="LabelGameOver" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.541176, 0.929412, 0.945098, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+
+[node name="Puntuacions" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.541176, 0.929412, 0.945098, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 50
+text = "Game Over"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+
+[node name="Comença" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = " Comença "
+
+[node name="Surt" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = " Surt
+"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_lpwre")
+autoplay = true
+
+[connection signal="pressed" from="ColorRect/VBoxContainer/HBoxContainer/Comença" to="." method="_on_comença_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/HBoxContainer/Surt" to="." method="_on_surt_pressed"]

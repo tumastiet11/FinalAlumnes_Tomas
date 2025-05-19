@@ -1,0 +1,25 @@
+Un punt per aconseguir cadascun d'aquests punts (sobre un total de 7)
+
+1. Feu que la nau s'hagi d'esperar 0.1 segons abans de tornar a disparar.
+Altereu la variable pot_disparar en la funció dispara de l'script nau.gd i
+restabliu-ne el valor al cap del temps estipulat mitjançant un Timer.
+
+2. Feu que quan la nau agafi el powerup de l'escena powerup_bomba.tscn augmenti
+en un el valor de la variable bombes.
+
+3. Quan mori un meteorit feu aparèixer l'escena de l'explosió explosió.tscn on
+era el meteorit.
+
+4. Feu que la funció actualitza del script Marcador.gd actualitzi el nombre del
+meteorits que han explotat al marcador.
+
+5. Feu que el motor emeti l'estela i faci soroll només quan la nau avança amb
+la tecla de la fletxa amunt.
+
+6. Feu que es carregui l'escena GameOver.tscn quan la vida de la nau sigui
+inferior o igual a 0
+
+7. Afegiu un menú principal a l'obrir el joc que permeti jugar o sortir-ne.
+
+8. EXTRA: Desar en un fitxer la puntuació màxima de totes les partides jugades
+i mostrar-la en els menús inicials i finals.

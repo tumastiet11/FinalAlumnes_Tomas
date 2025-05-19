@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7hcf04v1ndjj"]
+
+[ext_resource type="Script" uid="uid://d3hrkbt6q7tse" path="res://Scripts/Marcador.gd" id="1_1rr67"]
+[ext_resource type="Texture2D" uid="uid://c7vdntf1gc6k2" path="res://Imatges/bomb.png" id="2_1nq05"]
+[ext_resource type="Shader" uid="uid://bxurufjtelpe6" path="res://Scripts/Explosió.gdshader" id="4_xc6ug"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_linpp"]
+atlas = ExtResource("2_1nq05")
+region = Rect2(0, 0, 1536, 512)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n41xv"]
+shader = ExtResource("4_xc6ug")
+shader_parameter/strength = 0.08
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.014
+shader_parameter/aberration = 0.425
+shader_parameter/width = 0.04
+shader_parameter/feather = 0.169
+
+[node name="Marcador" type="CanvasLayer"]
+script = ExtResource("1_1rr67")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -21.0
+offset_right = 21.0
+offset_bottom = 57.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="Bombes" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="Bombes"]
+offset_right = 1536.0
+offset_bottom = 512.0
+scale = Vector2(0.1, 0.1)
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+
+[node name="BarraBombes" type="TextureProgressBar" parent="Bombes/MarginContainer"]
+texture_repeat = 2
+layout_mode = 2
+max_value = 3.0
+value = 3.0
+allow_greater = true
+texture_progress = SubResource("AtlasTexture_linpp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_n41xv")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

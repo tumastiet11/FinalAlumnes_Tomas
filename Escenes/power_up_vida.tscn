@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://x4yfcvmbpm5w"]
+
+[ext_resource type="Script" uid="uid://dks7nsdoin722" path="res://Scripts/power_up_vida.gd" id="1_bme2g"]
+[ext_resource type="AudioStream" uid="uid://y0ugj3e5in3e" path="res://Sons/forceField_004.ogg" id="2_g3tag"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_30inc"]
+radius = 18.7142
+
+[node name="PowerUPVida" type="Area2D"]
+scale = Vector2(1.5, 1.5)
+collision_layer = 8
+script = ExtResource("1_bme2g")
+
+[node name="PowerupGreenShield" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_30inc")
+
+[node name="SoPowerUP" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_g3tag")
+pitch_scale = 1.4
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="SoPowerUP" to="." method="_on_so_power_up_finished"]
